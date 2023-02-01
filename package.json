@@ -1,6 +1,6 @@
 {
   "name": "bte-projection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "T++ projection files re-written in typescript",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
