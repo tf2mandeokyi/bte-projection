@@ -19,6 +19,11 @@ export { SinusoidalProjection }                 from './projection/sinusoidal';
 
 export { OutOfProjectionBoundsError }           from './projection/oob';
 
+export {
+    BTE_PROJECTION
+} from './constants';
 
-export * as TerraConstants from './constants'
-export * as MathUtil       from './util/math'
+export { 
+    V2d, GeographicCoordinate, Spherical, Cartesian, Bounds, TissotIndicatrix,
+    getDistortionAmount 
+} from './util/math';
