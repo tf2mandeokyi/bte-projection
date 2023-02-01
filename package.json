@@ -1,0 +1,16 @@
+{
+  "name": "bte-projection",
+  "version": "1.0.0",
+  "description": "T++ projection files re-written in typescript",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "keywords": [],
+  "author": "original T++ developers and m4ndeokyi",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.9.5"
+  }
+}
