@@ -1,5 +1,5 @@
 
-## bte-projection
+# bte-projection
 
 A javascript/typescript package that is a re-written version of [T++ mod](https://github.com/BuildTheEarth/terraplusplus)'s projection files.
 
