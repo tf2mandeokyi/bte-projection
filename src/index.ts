@@ -18,11 +18,11 @@ export { EquirectangularProjection }            from './projection/equirectangul
 export { SinusoidalProjection }                 from './projection/sinusoidal';
 
 export { OutOfProjectionBoundsError }           from './projection/oob';
-
-export {
-    BTE_PROJECTION
-} from './constants';
-
 export { 
-    XYCoord, GeoCoord, Spherical, Cartesian, Bounds, TissotIndicatrix
-} from './util/math';
+    GeographicProjection, 
+    EARTH_CIRCUMFERENCE, 
+    EARTH_POLAR_CIRCUMFERENCE 
+} from './projection/geographic';
+
+export * from './constants';
+export * from './util/math';
