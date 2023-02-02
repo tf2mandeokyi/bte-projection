@@ -1,6 +1,6 @@
 src/
 dist/test/
 
-jest.config.jest
+jest.config.js
 tsconfig.build.json
 tsconfig.json
