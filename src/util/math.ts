@@ -4,8 +4,8 @@ export type Vec6Array = [ number, number, number, number, number, number ];
 export type RotationMatrix = [ Vec3Array, Vec3Array, Vec3Array ];
 
 
-export type GeographicCoordinate = { lat: number; lon: number; }
-export type V2d = { x: number; y: number; }
+export type GeoCoord = { lat: number; lon: number; }
+export type XYCoord = { x: number; y: number; }
 export type Spherical = { lambda: number, phi: number }
 export type Cartesian = { x: number, y: number, z: number }
 
@@ -57,7 +57,7 @@ export function toDegrees(param: number | { [x: string]: number }) : number {
 }
 
 
-export function geo2Spherical(geo: GeographicCoordinate) : Spherical {
+export function geo2Spherical(geo: GeoCoord) : Spherical {
     return {
         lambda: toRadians(geo.lon),
         phi:    toRadians(90 - geo.lat)
@@ -65,7 +65,7 @@ export function geo2Spherical(geo: GeographicCoordinate) : Spherical {
 }
 
 
-export function spherical2Geo(spherical: Spherical) : GeographicCoordinate {
+export function spherical2Geo(spherical: Spherical) : GeoCoord {
     return {
         lon: toDegrees(spherical.lambda),
         lat: 90 - toDegrees(spherical.phi)
@@ -127,11 +127,4 @@ export function matVecProdD<T extends number[]>(matrix: number[][], vector: numb
         }
     }
     return result;
-}
-
-export function getDistortionAmount(tissot: TissotIndicatrix) {
-    return {
-        value: (tissot.maxScaleFactor + tissot.minScaleFactor) / 2,
-        error: (tissot.maxScaleFactor - tissot.minScaleFactor) / 2
-    }
 }

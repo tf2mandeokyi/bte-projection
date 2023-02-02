@@ -1,4 +1,4 @@
-import { GeographicCoordinate, V2d } from "../../util/math";
+import { GeoCoord, XYCoord } from "../../util/math";
 import { checkTrue } from "../../util/validate";
 import { GeographicProjection } from "../geographic";
 import { ProjectionTransform } from "./transform";
@@ -28,11 +28,11 @@ export class OffsetProjectionTransform extends ProjectionTransform {
         return b;
     }
 
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
         return this.delegate.toGeo({ x: x - this.dx, y: y - this.dy });
     }
 
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
         let pos = this.delegate.fromGeo(coord);
         pos.x += this.dx;
         pos.y += this.dy;

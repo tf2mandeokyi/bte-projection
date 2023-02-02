@@ -1,4 +1,4 @@
-import { GeographicCoordinate, toDegrees, toRadians, V2d } from "../../util/math";
+import { GeoCoord, toDegrees, toRadians, XYCoord } from "../../util/math";
 import { EARTH_CIRCUMFERENCE, GeographicProjection } from "../geographic";
 import { OutOfProjectionBoundsError } from "../oob";
 
@@ -20,7 +20,7 @@ export class TransverseMercatorProjection extends GeographicProjection {
         return (Math.floor(longitude / this.ZONE_WIDTH) + 0.5) * this.ZONE_WIDTH;
     }
 
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
         OutOfProjectionBoundsError.checkLongitudeLatitudeInRange(coord);
         let lam = toRadians(coord.lon);
         let phi = toRadians(coord.lat);
@@ -34,7 +34,7 @@ export class TransverseMercatorProjection extends GeographicProjection {
         return { x, y };
     }
 
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
         OutOfProjectionBoundsError.checkInRange(x, y, Math.PI, Math.PI / 2);
         let centralMeridian = TransverseMercatorProjection.getCentralMeridian(x);
         x -= centralMeridian;

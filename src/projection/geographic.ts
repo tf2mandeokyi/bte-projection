@@ -1,5 +1,5 @@
 import { toDegrees, toRadians } from "../util/math";
-import { Bounds, GeographicCoordinate, V2d, TissotIndicatrix } from "../util/math";
+import { Bounds, GeoCoord, XYCoord, TissotIndicatrix } from "../util/math";
 
 
 export const EARTH_CIRCUMFERENCE = 40075017;
@@ -12,13 +12,13 @@ export abstract class GeographicProjection {
     /**
      * Converts map coordinates to geographic coordinates
      */
-    abstract toGeo(coord: V2d) : GeographicCoordinate;
+    abstract toGeo(coord: XYCoord) : GeoCoord;
 
 
     /**
      * Converts geographic coordinates to map coordinates
      */
-    abstract fromGeo(coord: GeographicCoordinate) : V2d;
+    abstract fromGeo(coord: GeoCoord) : XYCoord;
 
 
     /**
@@ -75,7 +75,7 @@ export abstract class GeographicProjection {
      * Calculates the vector that goes a given distance north and a given distance east from the given point in the projected space.
      * This is useful to get a direction in the projected space, e.g. it is used to calculate the north vector used when sending eyes of ender.
      */
-    vector(coord: V2d, vector: { north: number, east: number }) : V2d {
+    vector(coord: XYCoord, vector: { north: number, east: number }) : XYCoord {
         let geo = this.toGeo(coord);
 
         //TODO: east may be slightly off because earth not a sphere
@@ -88,7 +88,7 @@ export abstract class GeographicProjection {
     }
 
 
-    private tissot_d(coord: GeographicCoordinate, d: number) : TissotIndicatrix {
+    private tissot_d(coord: GeoCoord, d: number) : TissotIndicatrix {
         let R = EARTH_CIRCUMFERENCE / (2 * Math.PI);
 
         let ddeg = toDegrees(d);
@@ -126,8 +126,17 @@ export abstract class GeographicProjection {
     /**
      * Computes the Tissot's indicatrix of this projection at the given point (i.e. the distortion).
      */
-    tissot(coord: GeographicCoordinate) {
+    tissot(coord: GeoCoord) {
         return this.tissot_d(coord, 1E-7);
+    }
+
+
+    getDistortion(coord: GeoCoord) {
+        let tissot = this.tissot(coord);
+        return {
+            value: Math.sqrt(Math.abs(tissot.areaInflation)),
+            maxAngular: tissot.maxAngularDistortion * 180.0 / Math.PI
+        }
     }
 
 
@@ -139,8 +148,8 @@ export abstract class GeographicProjection {
      * 
      * @returns the corresponding azimuth, in degrees, counted positively clockwise, between 0° and 360°.
      */
-    private azimuth_d(coord: V2d, angle: number, d: number) : number {
-        let coord2 : V2d = {
+    private azimuth_d(coord: XYCoord, angle: number, d: number) : number {
+        let coord2 : XYCoord = {
             x: coord.x - d * Math.sin(toRadians(angle)),
             y: coord.y + d * Math.cos(toRadians(angle))
         }
@@ -165,7 +174,7 @@ export abstract class GeographicProjection {
      * 
      * @returns the corresponding azimuth, in degrees, counted positively clockwise, between 0° and 360°.
      */
-    azimuth(coord: V2d, angle: number) : number {
+    azimuth(coord: XYCoord, angle: number) : number {
         return this.azimuth_d(coord, angle, 1E-5);
     }
 }

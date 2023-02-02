@@ -1,13 +1,13 @@
-import { GeographicCoordinate, V2d } from "../../util/math";
+import { GeoCoord, XYCoord } from "../../util/math";
 import { ProjectionTransform } from "./transform";
 
 export class FlipVerticalProjectionTransform extends ProjectionTransform {
 
-    toGeo(coord: V2d) {
+    toGeo(coord: XYCoord) {
         return this.delegate.toGeo({ x: coord.x, y: -coord.y });
     }
 
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
         let p = this.delegate.fromGeo(coord);
         return { x: p.x, y: -p.y };
     }

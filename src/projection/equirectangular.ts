@@ -1,4 +1,4 @@
-import { GeographicCoordinate, V2d } from "../util/math";
+import { GeoCoord, XYCoord } from "../util/math";
 import { GeographicProjection } from "./geographic";
 import { OutOfProjectionBoundsError } from "./oob";
 
@@ -10,7 +10,7 @@ export class EquirectangularProjection extends GeographicProjection {
      * @param y - y map coordinate
      * @return {longitude, latitude} in degrees
      */
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
         let geo = { lon: x, lat: y };
         OutOfProjectionBoundsError.checkLongitudeLatitudeInRange(geo);
         return geo;
@@ -23,7 +23,7 @@ export class EquirectangularProjection extends GeographicProjection {
      * @param latitude  - latitude, in degrees
      * @return {x, y} map coordinates
      */
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
         OutOfProjectionBoundsError.checkLongitudeLatitudeInRange(coord);
         return { x: coord.lon, y: coord.lat };
     }

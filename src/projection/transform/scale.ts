@@ -1,4 +1,4 @@
-import { GeographicCoordinate, V2d } from "../../util/math";
+import { GeoCoord, XYCoord } from "../../util/math";
 import { GeographicProjection } from "../geographic";
 import { ProjectionTransform } from "./transform";
 
@@ -12,11 +12,11 @@ export class ScaleProjectionTransform extends ProjectionTransform {
         this.y = y;
     }
 
-    toGeo(coord: V2d) {
+    toGeo(coord: XYCoord) {
         return this.delegate.toGeo({ x: coord.x / this.x, y: coord.y / this.y });
     }
 
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
         let p = this.delegate.fromGeo(coord);
         return { x: p.x * this.x, y: p.y * this.y };
     }

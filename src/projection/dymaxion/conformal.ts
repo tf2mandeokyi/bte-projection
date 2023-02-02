@@ -1,5 +1,5 @@
 import { DymaxionProjection } from "./dymaxion";
-import { ROOT3, V2d, Vec3Array, Vec6Array } from "../../util/math";
+import { ROOT3, XYCoord, Vec3Array, Vec6Array } from "../../util/math";
 import conformalData from './conformalTxt'
 
 
@@ -16,7 +16,7 @@ class InvertableVectorField {
         this.vy = vy;
     }
 
-    getInterpolatedVector(coord: V2d) : Vec6Array {
+    getInterpolatedVector(coord: XYCoord) : Vec6Array {
         let { x, y } = coord;
 
         //scale up triangle to be triangleSize across
@@ -91,8 +91,8 @@ class InvertableVectorField {
         ];
     }
 
-    applyNewtonsMethod(expectedf: number, expectedg: number, est: V2d, iter: number) : V2d {
-        let newEst: V2d = { ...est };
+    applyNewtonsMethod(expectedf: number, expectedg: number, est: XYCoord, iter: number) : XYCoord {
+        let newEst: XYCoord = { ...est };
 
         for (let i = 0; i < iter; i++) {
             let c = this.getInterpolatedVector(newEst);
@@ -178,7 +178,7 @@ export class ConformalDymaxionProjection extends DymaxionProjection {
     }
 
 
-    inverseTriangleTransform(coord: V2d) : Vec3Array {
+    inverseTriangleTransform(coord: XYCoord) : Vec3Array {
         let { ARC } = DymaxionProjection;
 
         coord.x /= ARC;

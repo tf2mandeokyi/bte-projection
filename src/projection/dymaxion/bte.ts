@@ -1,4 +1,4 @@
-import { GeographicCoordinate, ROOT3, toRadians, V2d } from "../../util/math";
+import { GeoCoord, ROOT3, toRadians, XYCoord } from "../../util/math";
 import { OutOfProjectionBoundsError } from "../oob";
 import { ConformalDymaxionProjection } from "./conformal";
 
@@ -28,7 +28,7 @@ export class BTEDymaxionProjection extends ConformalDymaxionProjection {
     protected static readonly ARCTIC_B = ARCTIC_Y - this.ARCTIC_M * BERING_X;
 
     
-    fromGeo(coord: GeographicCoordinate) : V2d {
+    fromGeo(coord: GeoCoord) : XYCoord {
 
         let { ARC } = BTEDymaxionProjection;
 
@@ -54,7 +54,7 @@ export class BTEDymaxionProjection extends ConformalDymaxionProjection {
     }
 
     
-    toGeo(coord: V2d) : GeographicCoordinate{
+    toGeo(coord: XYCoord) : GeoCoord{
 
         let { ARC } = BTEDymaxionProjection;
         let { x, y } = coord;
@@ -95,7 +95,7 @@ export class BTEDymaxionProjection extends ConformalDymaxionProjection {
         return super.toGeo(coord);
     }
 
-    isEurasianPart(coord: V2d) : boolean {
+    isEurasianPart(coord: XYCoord) : boolean {
 
         let { ARC, ARCTIC_B, ARCTIC_M } = BTEDymaxionProjection;
         let { x, y } = coord;

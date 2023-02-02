@@ -8,13 +8,12 @@ A javascript/typescript package that is a re-written version of [T++ mod](https:
 javascript:
 
 ```js
-const { BTE_PROJECTION, getDistortionAmount } = require('bte-projection')
+const { BTE_PROJECTION } = require('bte-projection')
 
 let coordinate = { lat: 40.74843814459844, lon: -73.98566440289457 };
 
 let converted = BTE_PROJECTION.fromGeo(coordinate);
-let tissot = BTE_PROJECTION.tissot(coordinate);
-let distortion = getDistortionAmount(tissot);
+let distortion = BTE_PROJECTION.getDistortion(coordinate);
 
 console.log(`In-game X coordinate: ${converted.x}`);
 console.log(`In-game Z coordinate: ${converted.y}`);
@@ -24,12 +23,10 @@ console.log(`Distortion amount: ${distortion.value}`);
 typescript:
 
 ```ts
-import { BTE_PROJECTION, V2d } from 'bte-projection'
+import { BTE_PROJECTION, XYCoord, GeoCoord } from 'bte-projection'
 
-let projection = BTE_PROJECTION;
-let coordinate : V2d = { x: -8525873.069135161, y: -6026164.9710848285 };
-
-let converted = projection.toGeo(coordinate);
+let coordinate: XYCoord = { x: -8525873.069135161, y: -6026164.9710848285 };
+let converted: GeoCoord = BTE_PROJECTION.toGeo(coordinate);
 
 console.log(`Latitute: ${converted.lat}`);
 console.log(`Longitude: ${converted.lon}`);

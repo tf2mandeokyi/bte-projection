@@ -1,4 +1,4 @@
-import { GeographicCoordinate } from "../util/math";
+import { GeoCoord } from "../util/math";
 
 export class OutOfProjectionBoundsError extends Error {
 
@@ -14,7 +14,7 @@ export class OutOfProjectionBoundsError extends Error {
     /**
      * @throws {@link OutOfProjectionBoundsError} if <code> Math.abs(longitude) > 180 || Math.abs(latitude) > 90 </code>
      */
-    static checkLongitudeLatitudeInRange(coord: GeographicCoordinate) {
+    static checkLongitudeLatitudeInRange(coord: GeoCoord) {
         this.checkInRange(coord.lon, coord.lat, 180, 90);
     }
 

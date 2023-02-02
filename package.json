@@ -1,16 +1,30 @@
 {
   "name": "bte-projection",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "T++ projection files re-written in typescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tf2mandeokyi/bte-projection"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "npm run test && npm run build",
+    "build": "npm run clean && npm run tsc",
+    "tsc": "tsc --project tsconfig.build.json",
+    "clean": "rimraf dist/",
+    "test": "jest"
   },
   "keywords": [],
   "author": "original T++ developers and m4ndeokyi",
   "license": "MIT",
   "dependencies": {
     "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "jest": "^29.4.1",
+    "rimraf": "^4.1.2",
+    "ts-jest": "^29.0.5"
   }
 }

@@ -1,4 +1,4 @@
-import { GeographicCoordinate, toDegrees, toRadians, V2d } from "../../util/math";
+import { GeoCoord, toDegrees, toRadians, XYCoord } from "../../util/math";
 import { EARTH_CIRCUMFERENCE, GeographicProjection } from "../geographic";
 import { OutOfProjectionBoundsError } from "../oob";
 import { LIMIT_LATITUDE } from "./web";
@@ -6,7 +6,7 @@ import { LIMIT_LATITUDE } from "./web";
 
 export class CenteredMercatorProjection extends GeographicProjection {
     
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
         OutOfProjectionBoundsError.checkInRange(x, y, 1, 1);
         return {
                 lat: x * 180.0,
@@ -14,7 +14,7 @@ export class CenteredMercatorProjection extends GeographicProjection {
         };
     }
 
-    fromGeo({ lat, lon }: GeographicCoordinate) {
+    fromGeo({ lat, lon }: GeoCoord) {
         OutOfProjectionBoundsError.checkInRange(lon, lat, 180, LIMIT_LATITUDE);
         return {
                 x: lon / 180.0,

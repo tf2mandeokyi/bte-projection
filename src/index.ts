@@ -24,6 +24,5 @@ export {
 } from './constants';
 
 export { 
-    V2d, GeographicCoordinate, Spherical, Cartesian, Bounds, TissotIndicatrix,
-    getDistortionAmount 
+    XYCoord, GeoCoord, Spherical, Cartesian, Bounds, TissotIndicatrix
 } from './util/math';

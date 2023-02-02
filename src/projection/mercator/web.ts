@@ -1,5 +1,5 @@
 import { GeographicProjection } from "../geographic";
-import { GeographicCoordinate, TAU, toDegrees, toRadians, V2d } from "../../util/math";
+import { GeoCoord, TAU, toDegrees, toRadians, XYCoord } from "../../util/math";
 import { OutOfProjectionBoundsError } from "../oob";
 import { notNegative } from "../../util/validate";
 
@@ -20,7 +20,7 @@ export class WebMercatorProjection extends GeographicProjection {
         this.scaleFrom = 256 << this.zoom;
     }
 
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
         if (x < 0 || y < 0 || x > this.scaleFrom || y > this.scaleFrom) {
             throw new OutOfProjectionBoundsError();
         }
@@ -30,7 +30,7 @@ export class WebMercatorProjection extends GeographicProjection {
         };
     }
 
-    fromGeo({ lon, lat }: GeographicCoordinate) {
+    fromGeo({ lon, lat }: GeoCoord) {
         OutOfProjectionBoundsError.checkInRange(lon, lat, 180, LIMIT_LATITUDE);
         return {
                 x: this.scaleFrom * (toRadians(lon) + Math.PI) / TAU,

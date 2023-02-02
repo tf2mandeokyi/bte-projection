@@ -1,4 +1,4 @@
-import { GeographicCoordinate, ROOT3, toDegrees, toRadians, V2d } from "../util/math";
+import { GeoCoord, ROOT3, toDegrees, toRadians, XYCoord } from "../util/math";
 import { EARTH_CIRCUMFERENCE, GeographicProjection } from "./geographic";
 import { OutOfProjectionBoundsError } from "./oob";
 
@@ -11,7 +11,7 @@ const A4 = 0.003796;
 export class EqualEarthProjection extends GeographicProjection {
 
 
-    toGeo({ x, y }: V2d) {
+    toGeo({ x, y }: XYCoord) {
 
         let theta = y / A1; //start with initial guess at y/A1 since A1 is by far the largest term
 
@@ -49,7 +49,7 @@ export class EqualEarthProjection extends GeographicProjection {
         };
     }
 
-    fromGeo(coord: GeographicCoordinate) {
+    fromGeo(coord: GeoCoord) {
     	OutOfProjectionBoundsError.checkLongitudeLatitudeInRange(coord);
 
         let sintheta = ROOT3 * Math.sin(toRadians(coord.lat)) / 2;

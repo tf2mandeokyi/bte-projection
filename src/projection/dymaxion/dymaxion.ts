@@ -1,4 +1,4 @@
-import { Bounds, Cartesian, cartesian2Spherical, geo2Spherical, GeographicCoordinate, matVecProdD, produceZYZRotationMatrix, ROOT3, RotationMatrix, Spherical, spherical2Cartesian, spherical2Geo, V2d, Vec2Array, Vec3Array } from "../../util/math";
+import { Bounds, Cartesian, cartesian2Spherical, geo2Spherical, GeoCoord, matVecProdD, produceZYZRotationMatrix, ROOT3, RotationMatrix, Spherical, spherical2Cartesian, spherical2Geo, XYCoord, Vec2Array, Vec3Array } from "../../util/math";
 import { GeographicProjection } from "../geographic";
 import { OutOfProjectionBoundsError } from "../oob";
 
@@ -11,7 +11,7 @@ import { OutOfProjectionBoundsError } from "../oob";
  *
  * @see {@link https://en.wikipedia.org/wiki/Regular_icosahedron#Spherical_coordinates Wikipedia}
  */
-const VERTICES_GEOCOORD : GeographicCoordinate[] = [
+const VERTICES_GEOCOORD : GeoCoord[] = [
     { lon: 10.536199,   lat: 64.700000 },
     { lon: -5.245390,   lat: 2.300882 },
     { lon: 58.157706,   lat: 10.447378 },
@@ -186,7 +186,7 @@ export class DymaxionProjection extends GeographicProjection {
     }
 
 
-    protected static findTriangleGrid(coord: V2d) : number {
+    protected static findTriangleGrid(coord: XYCoord) : number {
 
         //cast equilateral triangles to 45 degrees right triangles (side length of root2)
         let xp = coord.x / this.ARC;
@@ -284,7 +284,7 @@ export class DymaxionProjection extends GeographicProjection {
     }
 
 
-    protected triangleTransform(vec: Vec3Array) : V2d {
+    protected triangleTransform(vec: Vec3Array) : XYCoord {
 
         let { Z, EL6, DVE } = DymaxionProjection;
 
@@ -301,7 +301,7 @@ export class DymaxionProjection extends GeographicProjection {
     }
 
 
-    protected inverseTriangleTransformNewton(pp: V2d) : Vec3Array {
+    protected inverseTriangleTransformNewton(pp: XYCoord) : Vec3Array {
 
         let { NEWTON, Z, R, EL6, DVE } = DymaxionProjection;
 
@@ -352,12 +352,12 @@ export class DymaxionProjection extends GeographicProjection {
     }
 
 
-    protected inverseTriangleTransform(coord: V2d) : Vec3Array {
+    protected inverseTriangleTransform(coord: XYCoord) : Vec3Array {
         return this.inverseTriangleTransformNewton(coord);
     }
 
 
-    fromGeo(coord: GeographicCoordinate) : V2d {
+    fromGeo(coord: GeoCoord) : XYCoord {
     	
     	OutOfProjectionBoundsError.checkLongitudeLatitudeInRange(coord);
 
@@ -390,7 +390,7 @@ export class DymaxionProjection extends GeographicProjection {
     }
 
     
-    toGeo(coord: V2d) : GeographicCoordinate {
+    toGeo(coord: XYCoord) : GeoCoord {
         let { x, y } = coord;
         let face = DymaxionProjection.findTriangleGrid(coord);
 
