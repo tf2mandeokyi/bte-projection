@@ -28,6 +28,6 @@ import { BTE_PROJECTION, XYCoord, GeoCoord } from 'bte-projection'
 let coordinate: XYCoord = { x: -8525873.069135161, y: -6026164.9710848285 };
 let converted: GeoCoord = BTE_PROJECTION.toGeo(coordinate);
 
-console.log(`Latitute: ${converted.lat}`);
+console.log(`Latitude: ${converted.lat}`);
 console.log(`Longitude: ${converted.lon}`);
 ```
