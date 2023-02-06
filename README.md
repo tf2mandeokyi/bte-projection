@@ -51,7 +51,7 @@ const projection: GeographicProjection = fromProjectionJSON({
     }
 });
 
-let converted: GeoCoord = projection.toGeo({ x: -8525873.069135161, y: -6026164.9710848285 });
+let converted = projection.toGeo({ x: -8525873.069135161, y: -6026164.9710848285 });
 
 console.log(`Latitude: ${converted.lat}`);
 console.log(`Longitude: ${converted.lon}`);
