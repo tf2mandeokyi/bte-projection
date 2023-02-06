@@ -31,3 +31,28 @@ let converted: GeoCoord = BTE_PROJECTION.toGeo(coordinate);
 console.log(`Latitude: ${converted.lat}`);
 console.log(`Longitude: ${converted.lon}`);
 ```
+
+Projection JSON:
+
+```ts
+import { GeographicProjection, fromProjectionJSON } from 'bte-projection'
+
+const projection: GeographicProjection = fromProjectionJSON({
+    scale: {
+        delegate: {
+            flip_vertical: {
+                delegate: {
+                    bte_conformal_dymaxion: {}
+                }
+            }
+        },
+        x: 7318261.522857145,
+        y: 7318261.522857145
+    }
+});
+
+let converted: GeoCoord = projection.toGeo({ x: -8525873.069135161, y: -6026164.9710848285 });
+
+console.log(`Latitude: ${converted.lat}`);
+console.log(`Longitude: ${converted.lon}`);
+```
