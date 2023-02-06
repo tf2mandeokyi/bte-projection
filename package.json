@@ -15,7 +15,7 @@
     "clean": "rimraf dist/",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": [ "buildtheearth", "bte", "projection", "terraplusplus" ],
   "author": "original T++ developers and m4ndeokyi",
   "license": "MIT",
   "devDependencies": {
