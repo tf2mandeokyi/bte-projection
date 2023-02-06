@@ -13,10 +13,10 @@ const { BTE_PROJECTION } = require('bte-projection')
 let coordinate = { lat: 40.74843814459844, lon: -73.98566440289457 };
 
 let converted = BTE_PROJECTION.fromGeo(coordinate);
-let distortion = BTE_PROJECTION.getDistortion(coordinate);
-
 console.log(`In-game X coordinate: ${converted.x}`);
 console.log(`In-game Z coordinate: ${converted.y}`);
+
+let distortion = BTE_PROJECTION.getDistortion(coordinate);
 console.log(`Distortion amount: ${distortion.value}`);
 ```
 
