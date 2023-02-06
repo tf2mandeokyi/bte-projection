@@ -1,7 +1,8 @@
 import { GeoCoord, XYCoord } from "../../util/math";
 import { checkTrue } from "../../util/validate";
-import { GeographicProjection } from "../geographic";
+import { GeographicProjection } from "../projection";
 import { ProjectionTransform } from "./transform";
+
 
 export class OffsetProjectionTransform extends ProjectionTransform {
     private dx: number;
@@ -12,8 +13,8 @@ export class OffsetProjectionTransform extends ProjectionTransform {
      * @param dx       - how much to move along the X axis
      * @param dy       - how much to move along the Y axis
      */
-    constructor(delegate: GeographicProjection, dx: number, dy: number) {
-        super(delegate);
+    constructor({ delegate, dx, dy }: { delegate: GeographicProjection, dx: number, dy: number }) {
+        super({ delegate });
         checkTrue(isFinite(dx) && isFinite(dy), "Projection offsets have to be finite doubles");
         this.dx = dx;
         this.dy = dy;

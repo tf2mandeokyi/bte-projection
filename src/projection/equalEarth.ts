@@ -1,5 +1,5 @@
 import { GeoCoord, ROOT3, toDegrees, toRadians, XYCoord } from "../util/math";
-import { EARTH_CIRCUMFERENCE, GeographicProjection } from "./geographic";
+import { EARTH_CIRCUMFERENCE, GeographicProjection } from "./projection";
 import { OutOfProjectionBoundsError } from "./oob";
 
 
@@ -7,6 +7,7 @@ const A1 = 1.340264;
 const A2 = -0.081106;
 const A3 = 0.000893;
 const A4 = 0.003796;
+
 
 export class EqualEarthProjection extends GeographicProjection {
 

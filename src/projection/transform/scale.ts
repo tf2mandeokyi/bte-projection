@@ -1,13 +1,14 @@
 import { GeoCoord, XYCoord } from "../../util/math";
-import { GeographicProjection } from "../geographic";
+import { GeographicProjection } from "../projection";
 import { ProjectionTransform } from "./transform";
+
 
 export class ScaleProjectionTransform extends ProjectionTransform {
     x: number;
     y: number;
 
-    constructor(delegate: GeographicProjection, x: number, y: number) {
-        super(delegate);
+    constructor({ delegate, x, y }: { delegate: GeographicProjection, x: number, y: number }) {
+        super({ delegate });
         this.x = x;
         this.y = y;
     }

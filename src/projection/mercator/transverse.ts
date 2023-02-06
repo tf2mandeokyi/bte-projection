@@ -1,6 +1,7 @@
 import { GeoCoord, toDegrees, toRadians, XYCoord } from "../../util/math";
-import { EARTH_CIRCUMFERENCE, GeographicProjection } from "../geographic";
+import { EARTH_CIRCUMFERENCE, GeographicProjection } from "../projection";
 import { OutOfProjectionBoundsError } from "../oob";
+
 
 export class TransverseMercatorProjection extends GeographicProjection {
     /**

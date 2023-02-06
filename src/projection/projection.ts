@@ -1,5 +1,4 @@
-import { toDegrees, toRadians } from "../util/math";
-import { Bounds, GeoCoord, XYCoord, TissotIndicatrix } from "../util/math";
+import { toDegrees, toRadians, Bounds, GeoCoord, XYCoord, TissotIndicatrix } from "../util/math";
 
 
 export const EARTH_CIRCUMFERENCE = 40075017;
@@ -7,6 +6,9 @@ export const EARTH_POLAR_CIRCUMFERENCE = 40008000;
 
 
 export abstract class GeographicProjection {
+
+
+    constructor(param?: {}) {}
 
 
     /**

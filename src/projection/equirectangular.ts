@@ -1,6 +1,7 @@
 import { GeoCoord, XYCoord } from "../util/math";
-import { GeographicProjection } from "./geographic";
+import { GeographicProjection } from "./projection";
 import { OutOfProjectionBoundsError } from "./oob";
+
 
 export class EquirectangularProjection extends GeographicProjection {
     /**

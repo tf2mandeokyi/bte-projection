@@ -1,9 +1,11 @@
-import { GeographicProjection } from "../geographic";
+import { GeographicProjection } from "../projection";
 import { GeoCoord, TAU, toDegrees, toRadians, XYCoord } from "../../util/math";
 import { OutOfProjectionBoundsError } from "../oob";
 import { notNegative } from "../../util/validate";
 
+
 export const LIMIT_LATITUDE = toDegrees(2 * Math.atan(Math.pow(Math.E, Math.PI)) - Math.PI / 2);
+
 
 export class WebMercatorProjection extends GeographicProjection {
 
@@ -12,8 +14,8 @@ export class WebMercatorProjection extends GeographicProjection {
     protected scaleTo: number;
     protected scaleFrom: number;
 
-    constructor(zoom: number) {
-        super();
+    constructor({ zoom }: { zoom: number }) {
+        super({});
         this.zoom = zoom != null ? notNegative(zoom, { message: "zoom" }) : 0;
 
         this.scaleTo = 1.0 / (256 << this.zoom);

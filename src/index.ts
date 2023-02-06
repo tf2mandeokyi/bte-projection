@@ -22,7 +22,8 @@ export {
     GeographicProjection, 
     EARTH_CIRCUMFERENCE, 
     EARTH_POLAR_CIRCUMFERENCE 
-} from './projection/geographic';
+} from './projection/projection';
 
+export * from './parser';
 export * from './constants';
 export * from './util/math';

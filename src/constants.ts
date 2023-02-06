@@ -1,10 +1,16 @@
-import { BTEDymaxionProjection } from "./projection/dymaxion/bte";
-import { GeographicProjection } from "./projection/geographic";
-import { FlipVerticalProjectionTransform } from "./projection/transform/flipVertical";
-import { ScaleProjectionTransform } from "./projection/transform/scale";
+import { fromProjectionJSON } from "./parser";
 
-export const BTE_PROJECTION = new ScaleProjectionTransform(
-    new FlipVerticalProjectionTransform(
-        new BTEDymaxionProjection()
-    ), 7318261.522857145, 7318261.522857145
-) as GeographicProjection;
+
+export const BTE_PROJECTION = fromProjectionJSON({
+    scale: {
+        delegate: {
+            flip_vertical: {
+                delegate: {
+                    bte_conformal_dymaxion: {}
+                }
+            }
+        },
+        x: 7318261.522857145,
+        y: 7318261.522857145
+    }
+});

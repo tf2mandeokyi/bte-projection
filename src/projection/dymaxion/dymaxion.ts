@@ -1,5 +1,5 @@
 import { Bounds, Cartesian, cartesian2Spherical, geo2Spherical, GeoCoord, matVecProdD, produceZYZRotationMatrix, ROOT3, RotationMatrix, Spherical, spherical2Cartesian, spherical2Geo, XYCoord, Vec2Array, Vec3Array } from "../../util/math";
-import { GeographicProjection } from "../geographic";
+import { GeographicProjection } from "../projection";
 import { OutOfProjectionBoundsError } from "../oob";
 
     

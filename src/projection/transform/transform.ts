@@ -1,11 +1,12 @@
-import { GeographicProjection } from "../geographic";
+import { GeographicProjection } from "../projection";
+
 
 export abstract class ProjectionTransform extends GeographicProjection {
 
     delegate: GeographicProjection;
 
-    constructor(delegate: GeographicProjection) {
-        super();
+    constructor({ delegate }: { delegate: GeographicProjection }) {
+        super({});
         this.delegate = delegate;
     }
 
