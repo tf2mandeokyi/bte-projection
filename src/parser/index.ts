@@ -16,9 +16,9 @@ import { SwapAxesProjectionTransform } from "../projection/transform/swapAxes"
 
 
 type PickOne<T> = { [P in keyof T]: Record<P, T[P]> & Partial<Record<Exclude<keyof T, P>, undefined>> }[keyof T]
-type JSONIfGeographicProjection<T> = NonNullable<{
+type GeographicProjectionParameterJSON<T> = {
     [ K in keyof T ]: T[K] extends GeographicProjection ? (ProjectionJSON | GeographicProjection) : T[K]
-}>
+}
 
 
 let projectionMap = {
@@ -42,19 +42,27 @@ let projectionMap = {
 
 
 export type ProjectionJSON = PickOne<{
-    [ K in keyof typeof projectionMap ]: JSONIfGeographicProjection<
-        ConstructorParameters<typeof projectionMap[K]>[0]
+    [ K in keyof typeof projectionMap ]: GeographicProjectionParameterJSON<
+        NonNullable<ConstructorParameters<typeof projectionMap[K]>[0]>
     >
 }>;
 
 
-export function fromProjectionJSON(param: ProjectionJSON) : GeographicProjection {
+/**
+ * Converts projection JSON into GeographicProjection class
+ */
+export function fromProjectionJSON(param: ProjectionJSON | string) : GeographicProjection {
+    if(typeof param === 'string') param = JSON.parse(param) as ProjectionJSON;
+
     let projectionType = Object.keys(param)[0] as keyof typeof projectionMap;
     let projectionClass = projectionMap[projectionType];
     let constructorParam = param[projectionType] as any;
     for(let key in constructorParam) {
         let value = constructorParam[key];
-        if(typeof value === 'object') constructorParam[key] = fromProjectionJSON(value);
+        if(typeof value === 'object') {
+            if(value instanceof GeographicProjection) continue;
+            constructorParam[key] = fromProjectionJSON(value);
+        }
     }
     return new projectionClass(constructorParam);
 }
