@@ -52,7 +52,18 @@ const projection: GeographicProjection = fromProjectionJSON({
 });
 
 let converted = projection.toGeo({ x: -8525873.069135161, y: -6026164.9710848285 });
-
 console.log(`Latitude: ${converted.lat}`);
 console.log(`Longitude: ${converted.lon}`);
+```
+
+Custom projection:
+
+```ts
+import { SinusoidalProjection, SwapAxesProjectionTransform, fromProjectionJSON } from 'bte-projection'
+
+// Both projection1 and projection2 here are the same
+const projection1 = new SwapAxesProjectionTransform({
+    delegate: new SinusoidalProjection()
+});
+const projection2 = fromProjectionJSON('"swap_axes": {"delegate": {"sinusoidal": {}}}');
 ```
